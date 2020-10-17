@@ -9,7 +9,7 @@ public class Main {
     // author Orel Eraki
     // Fibonacci algorithm
     // O(log2 n)
-    public static BigInteger Fibonacci(int n) {
+    public static BigInteger fibMatrixMultiplication(int n) {
 
         int num = Math.abs(n);
         if (num == 0) {
@@ -31,7 +31,7 @@ public class Main {
         return result[1][1].multiply(BigInteger.valueOf(((n < 0) ? -1:1)));
     }
 
-    public static BigInteger[][] MultiplyMatrix(BigInteger[][] mat1, BigInteger[][] mat2) {
+    private static BigInteger[][] MultiplyMatrix(BigInteger[][] mat1, BigInteger[][] mat2) {
         return new BigInteger[][] {
                 {
                         mat1[0][0].multiply(mat2[0][0]).add(mat1[0][1].multiply(mat2[1][0])),
@@ -44,7 +44,7 @@ public class Main {
         };
     }
 
-    public static BigInteger fib(int n) {
+    public static BigInteger fibFormula(int n) {
         BigDecimal Phi  = BigDecimal.valueOf((1 + Math.sqrt(5)) / 2);
         BigDecimal mPhi = BigDecimal.valueOf((1 - Math.sqrt(5)) / 2);
         return Phi.pow(n).subtract(mPhi.pow(n)).divideToIntegralValue(BigDecimal.valueOf(Math.sqrt(5))).toBigInteger();
@@ -71,21 +71,21 @@ public class Main {
         int n = 200000;
 
         Instant start = Instant.now();
-        String res = fib(n).toString();
+        String res = fibFormula(n).toString();
         Duration duration = Duration.between(start, Instant.now());
-        System.out.println("Fibonacci with O(1)      of " + n + "th term is " + res + " with number of digits "
-                + res.length() + " and time in nanos:" + duration.getNano());
+        System.out.println("Fibonacci Formula with O(1) time complexity                    of " + n + "th term is " + res
+                + " with number of digits " + res.length() + " and time in nanos:" + duration.getNano());
 
         start = Instant.now();
-        res = Fibonacci(n).toString();
+        res = fibMatrixMultiplication(n).toString();
         duration = Duration.between(start, Instant.now());
-        System.out.println("Fibonacci with O(log2 N) of " + n + "th term is " + res + " with number of digits "
-                + res.length() + " and time in nanos:" + duration.getNano());
+        System.out.println("Fibonacci Matrix Multiplication with O(log2 N) time complexity of " + n + "th term is " + res
+                + " with number of digits " + res.length() + " and time in nanos:" + duration.getNano());
 
         start = Instant.now();
         res = fibOldSchool(n).toString();
         duration = Duration.between(start, Instant.now());
-        System.out.println("Fibonacci with O(N)      of " + n + "th term is " + res + " with number of digits "
-                + res.length() + " and time in nanos:" + duration.getNano());
+        System.out.println("Fibonacci Dynamic Optimized with O(N) time complexity          of " + n + "th term is " + res
+                + " with number of digits " + res.length() + " and time in nanos:" + duration.getNano());
     }
 }
