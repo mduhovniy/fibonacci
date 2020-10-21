@@ -68,20 +68,23 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int n = 200000;
+        int n = 2000000;
 
+        // works fine just for N < 70 and the worst by performance than any other because of BigDecimal.pow usage
         Instant start = Instant.now();
         String res = fibFormula(n).toString();
         Duration duration = Duration.between(start, Instant.now());
         System.out.println("Fibonacci Formula with O(1) time complexity                    of " + n + "th term is " + res
                 + " with number of digits " + res.length() + " and time in nanos:" + duration.getNano());
 
+        // faster then next with N > 500 approx - depends on environment
         start = Instant.now();
         res = fibMatrixMultiplication(n).toString();
         duration = Duration.between(start, Instant.now());
         System.out.println("Fibonacci Matrix Multiplication with O(log2 N) time complexity of " + n + "th term is " + res
                 + " with number of digits " + res.length() + " and time in nanos:" + duration.getNano());
 
+        // faster then previous with N < 500 approx - depends on environment
         start = Instant.now();
         res = fibOldSchool(n).toString();
         duration = Duration.between(start, Instant.now());
